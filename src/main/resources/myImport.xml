@@ -4,5 +4,5 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd"
        default-lazy-init="false">
 
-    <bean name="learnBean" class="com.rutine.troubleshoot.container.bean.BeanA" />
+    <bean name="xml#BeanA" class="com.rutine.troubleshoot.container.bean.BeanA" />
 </beans>

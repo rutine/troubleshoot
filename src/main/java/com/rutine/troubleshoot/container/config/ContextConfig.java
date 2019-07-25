@@ -1,8 +1,6 @@
 package com.rutine.troubleshoot.container.config;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 /**
  * 配置类主入口
@@ -12,7 +10,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 //@ComponentScan(basePackages = "com.rutine.troubleshoot.container.bean")
-@Import(ConfigSelector.class)
+@EnableConfigX(ConfigA.class)
 public class ContextConfig {
 
 }

@@ -1,5 +1,8 @@
 package com.rutine.troubleshoot.container.config;
 
+import com.rutine.troubleshoot.container.bean.ConfigBeanImportSelector;
+import org.springframework.context.annotation.Import;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,6 +12,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ConfigSelect {
+@Import(ConfigBeanImportSelector.class)
+public @interface EnableConfigX {
     Class<?> value();
 }
