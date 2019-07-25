@@ -1,4 +1,4 @@
-package com.rutine.troubleshoot;
+package com.rutine.troubleshoot.learn;
 
 import com.rutine.troubleshoot.utils.JsonUtils;
 import org.springframework.core.annotation.AliasFor;
@@ -29,6 +29,11 @@ import java.util.Set;
  * @date 2019/4/12 17:24
  */
 public class LearnAnnotationAliasFor {
+
+    public static void main(String[] args) throws Exception {
+        LearnAnnotationAliasFor.test();
+    }
+
     public static void test()  {
         //获取所有属性别名
         Map<String, List<String>> map = getAttributeAliasMap(Rutinee.class);

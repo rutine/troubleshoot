@@ -1,4 +1,4 @@
-package com.rutine.troubleshoot;
+package com.rutine.troubleshoot.learn;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,10 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class LearnJarFile {
+
+    public static void main(String[] args) throws Exception {
+        LearnJarFile.test();
+    }
     
     public static void test() throws IOException {
       JarFile jarFile = new JarFile("C:/Users/administrator/.m2/repository/org/springframework/spring-beans/4.2.6.RELEASE/spring-beans-4.2.6.RELEASE.jar");

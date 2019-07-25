@@ -1,4 +1,4 @@
-package com.rutine.troubleshoot;
+package com.rutine.troubleshoot.learn;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,6 +6,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LearnPattern {
+
+    public static void main(String[] args) throws Exception {
+        LearnPattern.test();
+    }
+
 
     public static void test() {
         Pattern pattern = Pattern.compile("d|(a(b))");

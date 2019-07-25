@@ -1,4 +1,4 @@
-package com.rutine.troubleshoot;
+package com.rutine.troubleshoot.learn;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -20,6 +20,10 @@ import java.lang.annotation.Target;
 @LearnAliasDescriptor.Rutine
 @LearnAliasDescriptor.Rutinee
 public class LearnAliasDescriptor {
+
+    public static void main(String[] args) throws Exception {
+        LearnAliasDescriptor.test();
+    }
 
     public static void test() {
         try {

@@ -1,4 +1,4 @@
-package com.rutine.troubleshoot;
+package com.rutine.troubleshoot.learn;
 
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
@@ -12,6 +12,11 @@ import java.lang.reflect.Method;
  * @date 2019/4/22 11:56
  */
 public class LearnSpringAopProxy {
+
+    public static void main(String[] args) throws Exception {
+        LearnSpringAopProxy.test();
+    }
+
     public static void test() {
         ProxyFactory factory = new ProxyFactory(new B());
         factory.addAdvice(new MyMethodBeforeAdvice());

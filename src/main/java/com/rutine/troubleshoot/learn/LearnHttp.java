@@ -1,4 +1,4 @@
-package com.rutine.troubleshoot;
+package com.rutine.troubleshoot.learn;
 
 import com.rutine.troubleshoot.utils.JsonUtils;
 import org.apache.commons.codec.Charsets;
@@ -47,6 +47,12 @@ public class LearnHttp {
     private static int totalRequests = 100;
 
     private String url = "http://localhost:8080/test";
+
+
+    public static void main(String[] args) throws Exception {
+        LearnHttp.test();
+    }
+
 
     public static void test() {
         new LearnHttp().testPostWithPool();

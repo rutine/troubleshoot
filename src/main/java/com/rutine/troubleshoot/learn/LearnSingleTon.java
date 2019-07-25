@@ -1,5 +1,5 @@
 
-package com.rutine.troubleshoot;
+package com.rutine.troubleshoot.learn;
 
 /**
  * 懒汉单例实现方法

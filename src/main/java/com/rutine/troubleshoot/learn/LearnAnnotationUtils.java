@@ -1,4 +1,4 @@
-package com.rutine.troubleshoot;
+package com.rutine.troubleshoot.learn;
 
 import org.springframework.core.annotation.AnnotationUtils;
 
@@ -16,6 +16,10 @@ import java.lang.annotation.Target;
  */
 @LearnAnnotationUtils.Rutineee
 public class LearnAnnotationUtils {
+
+    public static void main(String[] args) throws Exception {
+        LearnAnnotationUtils.test();
+    }
 
     public static void test()  {
         //GET语义

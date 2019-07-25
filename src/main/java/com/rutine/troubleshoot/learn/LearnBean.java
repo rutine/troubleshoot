@@ -1,4 +1,4 @@
-package com.rutine.troubleshoot;
+package com.rutine.troubleshoot.learn;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
@@ -13,6 +13,12 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
  * @author rutine
  */
 public class LearnBean implements InitializingBean, BeanPostProcessor {
+
+    public static void main(String[] args) throws Exception {
+        LearnBean.test();
+    }
+
+
     private LearnBean learnBean;
     
     public static void test() {

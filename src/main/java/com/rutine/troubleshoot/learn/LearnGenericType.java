@@ -1,4 +1,4 @@
-package com.rutine.troubleshoot;
+package com.rutine.troubleshoot.learn;
 
 import org.springframework.core.ResolvableType;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,11 @@ import java.lang.reflect.Type;
  * @date 2017年3月18日
  */
 public class LearnGenericType {
+
+    public static void main(String[] args) throws Exception {
+        LearnGenericType.test();
+    }
+
 
     public static void test() throws NoSuchMethodException, SecurityException {
         Type type = B.class.getGenericSuperclass();
