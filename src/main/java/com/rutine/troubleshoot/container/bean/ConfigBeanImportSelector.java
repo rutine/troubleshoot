@@ -17,11 +17,13 @@ public class ConfigBeanImportSelector implements ImportSelector {
     @Override
     public String[] selectImports(AnnotationMetadata importingClassMetadata) {
         if (!importingClassMetadata.hasAnnotation(EnableConfigX.class.getName())) {
-            throw new RuntimeException(String.format("主动类: %s 必须添加注解: @EnableConfigX", importingClassMetadata.getClassName()));
+            throw new RuntimeException(String.format("主动类: %s 必须添加注解: @EnableConfigX",
+                    importingClassMetadata.getClassName()));
         }
 
         //获取@EnableConfigX 注解的 属性 -> 值 Map
-        Map<String, Object> attributes = importingClassMetadata.getAnnotationAttributes(EnableConfigX.class.getName());
+        Map<String, Object> attributes = importingClassMetadata
+                .getAnnotationAttributes(EnableConfigX.class.getName());
         //获取 value 属性的值
         Class<?> clazz = (Class<?>) attributes.get("value");
 

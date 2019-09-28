@@ -15,7 +15,9 @@ import org.springframework.core.type.AnnotationMetadata;
 public class BeanImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 
     @Override
-    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata,
+                                        BeanDefinitionRegistry registry) {
+
         //我们限制"主动类"必须是ConfigA才开始注册我们的Bean定义
         if (importingClassMetadata.getClassName().equals(ConfigA.class.getName())) {
             System.out.println("------> do registry");
