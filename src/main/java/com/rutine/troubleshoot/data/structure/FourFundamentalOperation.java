@@ -1,7 +1,8 @@
 package com.rutine.troubleshoot.data.structure;
 
 import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @author rutine
@@ -17,6 +18,7 @@ public class FourFundamentalOperation {
         int q = 10;
         System.out.println(((q << 6) + (q << 5) + (q << 2)));
         System.out.println(numberZeroLeading(1));
+        calc();
     }
 
     public static int numberZeroLeading(int a) {
@@ -34,89 +36,124 @@ public class FourFundamentalOperation {
         return n;
     }
 
-    public static void firstPriority() {
-        String exp = "42+2*{3-1+[5+2*(2+2)]}+3+1*2-3/1";
-        Deque<Object> stack = new ArrayDeque<>();
-        StringBuilder builder = new StringBuilder();
+    public static void calc() {
+        String exp = "42+2*(3-1+(5+2*(2+2)))+3+1*2-3/1";
+        Queue<Object> queue = new ArrayDeque<>();
+        parse(exp, queue);
+
+        Stack<Double> operands = new Stack<>();
+        while (!queue.isEmpty()) {
+            Object obj = queue.poll();
+            if (obj instanceof Double) {
+                operands.push((Double) obj);
+            } else {
+                Double first = operands.pop();
+                Double second = operands.pop();
+                switch (((Character) obj)) {
+                    case '+':
+                        operands.push(first + second);
+                        break;
+                    case '-':
+                        operands.push(second - first);
+                        break;
+                    case '*':
+                        operands.push(first * second);
+                        break;
+                    case '/':
+                        operands.push(second / first);
+                        break;
+                }
+            }
+        }
+
+        System.out.println(operands.peek());
+        System.out.println(42+2*(3-1+5+2*(2+2))+3+1*2-3/1);
+    }
+
+    static void parse(String exp, Queue<Object> queue) {
+        Stack<Character> stack = new Stack<>();
+        StringBuilder operand = new StringBuilder();
         for (int i = 0; i < exp.length(); i++) {
             char ch = exp.charAt(i);
             if (Character.isDigit(ch)) {
-                builder.append(ch);
+                operand.append(ch);
             }
-            else if (ch == '+' || ch == '-' || ch == '*' || ch == '/'
-                    || ch == '{' || ch == '[' || ch == '(') {
-                if (builder.length() > 0) {
-                    stack.push(toNumber(builder.toString()));
-                    builder.setLength(0);
+            else if (ch == ' ') {
+                continue;
+            }
+            else if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '(') {
+                if (operand.length() > 0) {
+                    queue.add(toNumber(operand.toString()));
+                    operand.setLength(0);
                 }
-                stack.push(ch);
-            }
-            else if (ch == '}' || ch == ']' || ch == ')') {
+                else if (priority(ch) != 2) {
+                    //连着两个操作符
+                }
 
+                while (true) {
+                    if (stack.isEmpty()) {
+                        stack.push(ch);
+                        break;
+                    }
+
+                    char top = stack.peek();
+                    if (priority(ch) > priority(top) || priority(top) == 2) {
+                        stack.push(ch);
+                        break;
+                    }
+
+                    queue.add(top);
+                    stack.pop();
+                }
+            }
+            else if (ch == ')') {
+                if (operand.length() > 0) {
+                    queue.add(toNumber(operand.toString()));
+                    operand.setLength(0);
+                }
+
+                while (!stack.isEmpty()) {
+                    char top = stack.pop();
+                    if (priority(top) == 2) {
+                        if (priority(top) != priority(ch)) {
+                            //illegal pair
+                        }
+
+                        break;
+                    }
+                    queue.add(top);
+                }
             }
             else {
                 //illegal char
             }
         }
-    }
-    //3+1*2-3/1
-    public static void secondPriority(Deque<Object> stack, boolean fromHead) {
-        double total = 0;
-        Object object = null;
-        while ((object = fromHead ? stack.poll() : stack.pollLast()) != null) {
-            if (object instanceof Number) {
-                double num = toNumber(object);
-                total = ((Number) object).doubleValue();
-            } else if (object instanceof Character) {
-                Character ch = (Character) object;
-                switch (ch) {
-                    case '*':
 
-                        break;
-                    case '/':
-
-                        break;
-                }
-            }
+        if (operand.length() > 0) {
+            queue.add(toNumber(operand.toString()));
+            operand.setLength(0);
+        }
+        while (!stack.isEmpty()) {
+            queue.add(stack.pop());
         }
     }
-    // 1+3-2
-    public static double thirdPriority(Deque<Object> stack, boolean fromHead) {
-        double total = 0;
-        int type = 0;
-        Object object = null;
-        while ((object = fromHead ? stack.poll() : stack.pollLast()) != null) {
-            if (object instanceof Number) {
-                double num = toNumber(object);
-                total = total + (type == 1 ? num : -num);
-            } else if (object instanceof Character) {
-                if (type != 0) {
-                    //invalid char
-                }
 
-                Character ch = (Character) object;
-                switch (ch) {
-                    case '+':
-                        type = 1;
-                        break;
-                    case '-':
-                        type = -1;
-                        break;
-                    default:
-                        object = null;
-                }
-            }
-            if (object == null) {
-                //invalid char
-            }
+    static int priority(char operator) {
+        if (operator == '+' || operator == '-') {
+            return 0;
+        } else if (operator == '*' || operator == '/') {
+            return 1;
+        } else if (operator == '(' || operator == ')') {
+            return 2;
         }
 
-        return total;
+        return -1;
     }
-    private static double toNumber(Object obj) {
+    static double toNumber(Object obj) {
         if (obj instanceof String) {
             return Double.valueOf((String) obj);
         }
+
         return ((Number) obj).doubleValue();
     }
 }
