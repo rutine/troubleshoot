@@ -1,8 +1,8 @@
 package com.rutine.troubleshoot.data.structure;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Queue;
-import java.util.Stack;
 
 /**
  * @author rutine
@@ -18,7 +18,8 @@ public class FourFundamentalOperation {
         int q = 10;
         System.out.println(((q << 6) + (q << 5) + (q << 2)));
         System.out.println(numberZeroLeading(1));
-        calc();
+
+        calc("42+2*(3-1+(5+2*(2+2)))+3+1*2-3/1");
     }
 
     public static int numberZeroLeading(int a) {
@@ -36,12 +37,11 @@ public class FourFundamentalOperation {
         return n;
     }
 
-    public static void calc() {
-        String exp = "42+2*(3-1+(5+2*(2+2)))+3+1*2-3/1";
+    public static void calc(String express) {
         Queue<Object> queue = new ArrayDeque<>();
-        parse(exp, queue);
+        parse(express, queue);
 
-        Stack<Double> operands = new Stack<>();
+        Deque<Double> operands = new ArrayDeque<>();
         while (!queue.isEmpty()) {
             Object obj = queue.poll();
             if (obj instanceof Double) {
@@ -71,7 +71,7 @@ public class FourFundamentalOperation {
     }
 
     static void parse(String exp, Queue<Object> queue) {
-        Stack<Character> stack = new Stack<>();
+        Deque<Character> stack = new ArrayDeque<>();
         StringBuilder operand = new StringBuilder();
         for (int i = 0; i < exp.length(); i++) {
             char ch = exp.charAt(i);
