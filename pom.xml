@@ -16,7 +16,7 @@
 
     <properties>
         <project.encoding>UTF-8</project.encoding>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <http-client.version>4.5.2</http-client.version>
     </properties>
 
