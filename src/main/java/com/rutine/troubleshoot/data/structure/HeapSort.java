@@ -20,27 +20,28 @@ public class HeapSort {
         int n = arr.length;
         //初建堆
         for (int i = (n / 2 - 1); i >= 0; i--) {
-            sift(arr, i, n - 1);
+            sift(arr, i, n);
         }
 
-        for (int i = 0; i < (n - 1); i++) {
+        for (int i = 0; i < n - 1; i++) {
             //交换第一个和第(n-i-1)个
             int tmp = arr[0];
             arr[0] = arr[n - i - 1];
             arr[n - i - 1] = tmp;
 
-            //从0 -> n-i-2重新筛选
-            sift(arr, 0, n - i - 2);
+            //从0 -> n-i-1重新筛选
+            sift(arr, 0, n - i - 1);
         }
     }
 
     //筛
-    static void sift(int[] arr, int start, int end) {
+    static void sift(int[] arr, int start, int len) {
        int i = start;
        int j = 2 * i + 1;
        int k = arr[i];
-       while (j <= end) {
-           if (j < end && k <= arr[j]) {
+       while (j < len) {
+           //选哪个分支
+           if ((j + 1) < len && arr[j] > arr[j + 1]) {
                j++;
            }
 
